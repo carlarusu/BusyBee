@@ -1,0 +1,173 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.app-name {
+  font-size: 28px;
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.has-gradient-text {
+  background: -webkit-linear-gradient(#13f7f4, #2af598);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  min-width: 0;
+  min-height: 0;
+
+  .board-bar {
+    background: rgba(gray, .5);
+    padding: 8px 15px;
+    display: flex;
+    flex-direction: row;
+
+    .board-name {
+      font-size: 20px;
+      font-weight: bold;
+      color: #45f69e;
+      padding-right: 20px;
+    }
+  }
+
+  .board-wrapper {
+    display: flex;
+    flex-grow: 1;
+    overflow-x: auto;
+    overflow-y: auto;
+
+    .board-columns {
+      display: flex;
+      flex-grow: 1;
+
+      .board-column{
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        flex-basis: 0; // force the columns to all be the same size regardless of content
+        overflow-y: auto;
+
+        min-width: 300px;
+        margin: 50px;
+        padding: 25px;
+
+        border-radius: 4px;
+
+        background: rgba(white, .5);
+
+        &:not(:first-child){
+          margin-left: 0;
+        }
+
+        .column-title{
+          font-size: 20px;
+          font-weight: 800;
+          font-family: 'Nunito', sans-serif;
+          text-transform: uppercase;
+          margin-bottom: 20px;
+        }
+      }
+
+      .new-board-column {
+        display: flex;
+        flex-direction: column;
+
+        min-width: 300px;
+        max-height: 100px;
+        margin: 50px;
+        padding: 25px;
+
+        border-radius: 4px;
+
+        background: rgba(white, .5);
+
+        &:not(:first-child){
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}
+
+.tasks-container {
+  flex-grow: 1;
+
+  .task {
+    font-family: 'Nunito';
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-bottom: solid 3px #ddd;
+    border-radius: 4px;
+
+    margin-bottom: 15px;
+
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,0.1),
+                0 3px 14px 2px rgba(0,0,0,0.2);
+
+    .task-description {
+      font-family: 'Nunito';
+      display: flex;
+      background: white;
+      padding: 10px 12px;
+      border-radius: 4px;
+    }
+
+    .task-date {
+      font-family: 'Nunito';
+      font-width: bold;
+      display: flex;
+      background: white;
+      padding: 10px 12px;
+
+    }
+  }
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  background: white;
+  border-bottom: solid 3px #ddd;
+  padding: 15px 12px;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+  0 8px 10px 1px rgba(0, 0, 0, 0.14),
+  0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.tasks-container.cdk-drop-list-dragging .task:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.bottom-content{
+  align-self: flex-end;
+}
+
+.align-center {
+  align-self: center;
+}
+

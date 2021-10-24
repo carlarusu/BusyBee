@@ -1,0 +1,149 @@
+<div class="root">
+  <div class="navbar has-background-dark">
+    <div class="navbar-brand">
+      <div class="navbar-item">
+        <h1 class="title has-text-primary">Board</h1>
+      </div>
+    </div>
+
+    <div class="navbar-menu">
+      <div class="navbar-start">
+        <p class="navbar-item has-text-primary">{{access}} rights</p>
+      </div>
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <button (click)="display_member_modal()" class="button is-success has-text-white">Add members</button>
+
+            <div class="modal" id="modal-member-page">
+              <div class="modal-background"></div>
+              <div class="modal-card" style="top: 30%">
+                <header class="modal-card-head">
+                  <p class="modal-card-title">Add new member</p>
+                  <button (click)="close_member_modal()" aria-label="close" class="delete"></button>
+                </header>
+                <section class="modal-card-body">
+
+                  <input [(ngModel)]="member" class="input has-background-light is-primary" placeholder="Member username"
+                         type="member-name">
+
+                </section>
+                <footer class="modal-card-foot">
+                  <button (click)="add_edit_member()" class="button is-success">Edit rights</button>
+                  <button (click)="add_view_member()" class="button is-success">View rights</button>
+                  <button (click)="close_member_modal()" class="button">Cancel</button>
+                </footer>
+              </div>
+            </div>
+
+            <button class="button is-success has-text-white" (click)="back()">Boards</button>
+            <button class="button is-success has-text-white" (click)="logout()">Log out</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="board">
+    <div class="board-bar">
+      <p class="board-name title">{{board.name}}</p>
+    </div>
+
+    <div class="board-wrapper">
+
+      <div cdkDropListGroup class="board-columns">
+        <div *ngFor="let column of board.cards" class="board-column">
+
+          <div class="column-title">
+            {{column.name}}
+          </div>
+
+          <div (cdkDropListDropped)="drop($event)"
+               [cdkDropListData]="column.tasks"
+               cdkDropList
+               class="tasks-container">
+            <div *ngFor="let item of column.tasks" cdkDrag class="task" [cdkDragDisabled]="isView">
+              <div class="task-description">{{ item.description }}</div>
+
+              <div *ngIf="item.due===2">
+                <div class="task-date has-text-white" *ngIf="item.dueDate!==null" style="background: lightgreen"><i class="far fa-clock" style="padding-right: 5px"></i>
+                  {{ item.dueDate.toString().substr(0, 10) }}</div>
+              </div>
+
+              <div *ngIf="item.due===1">
+                <div class="task-date has-text-white" *ngIf="item.dueDate!==null" style="background: #fcd12a"><i class="far fa-clock" style="padding-right: 5px"></i>
+                  {{ item.dueDate.toString().substr(0, 10) }}</div>
+              </div>
+
+              <div *ngIf="item.due===0">
+                <div class="task-date has-text-white" *ngIf="item.dueDate!==null"  style="background: lightsalmon"><i class="far fa-clock" style="padding-right: 5px"></i>
+                  {{ item.dueDate.toString().substr(0, 10) }}</div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="bottom-content">
+            <button (click)="display_task_modal(column.id)" class="button is-primary has-text-white" id="task-button"
+                    style="width:120px">Add new task
+            </button>
+          </div>
+
+          <div class="modal" id="modal-page">
+            <div class="modal-background"></div>
+            <div class="modal-card" style="top: 30%">
+              <header class="modal-card-head">
+                <p class="modal-card-title">Create new task</p>
+                <button (click)="close_task_modal()" aria-label="close" class="delete"></button>
+              </header>
+              <section class="modal-card-body">
+                <label>Text</label>
+                <input [(ngModel)]="task.description" class="input has-background-light is-primary" placeholder="Add task text"
+                       type="board-name">
+
+                <label>Due Date (optional)</label>
+                <input [(ngModel)]="task.dueDate" class="input has-background-light is-primary" style="margin-top: 10px" type="Date"
+                       placeholder="Add due date">
+              </section>
+              <footer class="modal-card-foot">
+                <button (click)="add_task(lastid)" class="button is-success">Save</button>
+                <button (click)="close_task_modal()" class="button">Cancel</button>
+              </footer>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="new-board-column">
+          <div class="align-center">
+            <button (click)="display_card_modal()" class="button is-primary has-text-white" id="board-button" style="width:120px">Add new card</button>
+          </div>
+        </div>
+
+        <div class="modal" id="modal-list-page">
+          <div class="modal-background"></div>
+          <div class="modal-card" style="top: 30%">
+            <header class="modal-card-head">
+              <p class="modal-card-title">Create new card</p>
+              <button (click)="close_card_modal()" aria-label="close" class="delete"></button>
+            </header>
+            <section class="modal-card-body">
+              <input [(ngModel)]="card.name" class="input has-background-light is-primary" placeholder="Add card name"
+                     type="board-name">
+            </section>
+            <footer class="modal-card-foot">
+              <button (click)="add_card()" class="button is-success">Save</button>
+              <button (click)="close_card_modal()" class="button">Cancel</button>
+            </footer>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+

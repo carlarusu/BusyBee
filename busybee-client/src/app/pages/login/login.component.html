@@ -1,0 +1,35 @@
+<div class="centered-content">
+  <div class="login-box">
+
+    <h1 class="title has-text-primary">Login</h1>
+
+    <div class="field">
+      <p class="control has-icons-left has-icons-right">
+        <input [(ngModel)]="loginModel.username" class="input has-background-light" placeholder="Email" type="email">
+        <span class="icon is-small is-left">
+          <i class="fas fa-envelope"></i>
+        </span>
+
+      </p>
+    </div>
+    <div class="field">
+      <p class="control has-icons-left">
+        <input [(ngModel)]="loginModel.password" class="input has-background-light" placeholder="Password" type="password">
+        <span class="icon is-small is-left">
+      <i class="fas fa-lock"></i>
+    </span>
+      </p>
+    </div>
+    <div class="field is-pulled-right">
+      <p class="control">
+        <button class="button is-success has-text-white" (click)="login()">Log in</button>
+      </p>
+    </div>
+    <div class="field is-pulled-left">
+      <p class="control">
+        <button class="button is-success has-text-white" (click)="register()">Sign up</button>
+      </p>
+    </div>
+
+  </div>
+</div>

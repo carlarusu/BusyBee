@@ -1,0 +1,54 @@
+<div class="centered-content">
+  <div class="boards-container">
+
+    <div class="sidebar has-background-white">
+      <h1 class="title has-text-primary">User: {{username}}</h1>
+
+      <div class="list-menu">
+        <p>Number of boards: {{boardNo}}</p>
+      </div>
+
+      <div class="bottom-content">
+        <button class="button is-success has-text-white" (click)="logout()">Log out</button>
+      </div>
+    </div>
+
+    <div class="boards-list-container has-background-light">
+      <h1 class="title has-text-primary">Boards</h1>
+
+      <!-- Board list -->
+
+      <div class="list-menu">
+        <a *ngFor="let item of boards" class="list-menu-item" (click)="goToBoard(item.id)">
+          <p>{{item.name}}</p>
+        </a>
+      </div>
+
+      <div class="bottom-content">
+        <button (click)="display_modal()" class="button is-primary has-text-white" id="board-button"
+                style="width:150px">Add new board
+        </button>
+      </div>
+
+      <div class="modal" id="modal-page">
+        <div class="modal-background"></div>
+        <div class="modal-card" style="top: 30%">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Create new board</p>
+            <button (click)="close_modal()" aria-label="close" class="delete"></button>
+          </header>
+          <section class="modal-card-body">
+            <input [(ngModel)]="board.name" class="input has-background-light is-primary" placeholder="Add board name"
+                   type="board-name">
+          </section>
+          <footer class="modal-card-foot">
+            <button (click)="create_board()" class="button is-success">Save</button>
+            <button (click)="close_modal()" class="button">Cancel</button>
+          </footer>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
